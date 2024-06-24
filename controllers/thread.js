@@ -4,13 +4,11 @@ const getAll = async (req, res) => {
     const result = await mongodb
     .getDb()
     .db()
-    .collection('thread')
-    .find()
-    .toArray();
-
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(result);
-    res.status(500).json({ error: 'An error occurred while retrieving thread' });
+    .collection('thread').find();
+    result.toArray().then((thread) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(thread);
+    });
   };
 
 module.exports = {
