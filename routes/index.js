@@ -1,6 +1,9 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 
-router.get('/');
+router.use('/', require('./swagger'));
+
+router.get('/', (req, res) => {res.send('Hello!')});
+
+router.use('/thread', require('./thread'));
 
 module.exports = router;
