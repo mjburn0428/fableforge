@@ -1,4 +1,5 @@
 const mongodb = require('../db/connect');
+const ObjectId = require('mongodb').ObjectId;
 
 const getAll = async (req, res) => {
   const result = await mongodb.getDb().db().collection('thread').find();
@@ -7,8 +8,6 @@ const getAll = async (req, res) => {
     res.status(200).json(thread);
   });
 };
-
-// TODO: write createThread function
 
 const createThread = async (req, res) => {
   try {
@@ -25,16 +24,42 @@ const createThread = async (req, res) => {
   }
 };
 // TODO: write updateThread function
+const updateThread = async (req, res, next) => {
+  try {
+    const threadId = new ObjectId(req.params.id);
+    const newData = {
+      title: req.body.title,
+      author: req.body.author,
+      publishedDate: req.body.publishedDate,
+      content: req.body.content,
+      tags: req.body.tags,
+    };
+    // console.log('grant', newData);
 
+    const result = await mongodb
+      .getDb()
+      .db()
+      .collection('thread')
+      .findOneAndUpdate({ _id: threadId }, { $set: newData });
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ message: 'Thread not found' });
+    }
+    res.status(204).json({ message: 'Thread updated succesfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
 // TODO: write getThreadsByAuthor function
 
 // TODO: write getThreadsByGenre function
 
-// TODO: write deleteThread function
+// TODO: write deleteThreadbyId function
 
 // TODO: write commentOnThread(post) function
 
 module.exports = {
   getAll,
   createThread,
+  updateThread,
 };
