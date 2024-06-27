@@ -1,0 +1,41 @@
+
+GET http://localhost:8080/thread
+
+### Get thread by ID
+GET http://localhost:8080/thread/667cd26963a3a699eff71aed
+
+### Post a thread
+POST http://localhost:8080/thread HTTP/1.1
+Content-Type: application/json
+
+ {
+  "title": "The Remnant's Hope",
+  "author": "Grant William Willis",
+  "publishedDate": "2023-08-15",
+  "content": "Jeck knew he had over done it this time.... ",
+  "tags": ["mystery", "fantasy"],
+  "metadata": {
+    "wordCount": 1500,
+    "genre": "Fantasy/Science-Fiction"
+  }
+}
+
+### Update a Thread
+PUT  http://localhost:8080/thread/667cd0ec63a3a699eff71aec HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "The Remnant's Hope",
+    "author": "Grant William Willis",
+    "publishedDate": "2023-08-15",
+    "content": "Jeck knew he had over done it this time.... ",
+    "tags": [
+      "mystery",
+      "adventure",
+      "cheese"
+    ],
+    "metadata": {
+      "wordCount": 1500,
+      "genre": "Fantasy/Science-Fiction"
+    }
+}
