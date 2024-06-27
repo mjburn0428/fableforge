@@ -28,7 +28,8 @@ Content-Type: application/json
     "content": "Jeck knew he had over done it this time.... ",
     "tags": [
       "mystery",
-      "adventure"
+      "adventure",
+      "cheese"
     ],
     "metadata": {
       "wordCount": 1500,

@@ -27,7 +27,13 @@ const createThread = async (req, res) => {
 const updateThread = async (req, res, next) => {
   try {
     const threadId = new ObjectId(req.params.id);
-    const newData = req.body;
+    const newData = {
+      title: req.body.title,
+      author: req.body.author,
+      publishedDate: req.body.publishedDate,
+      content: req.body.content,
+      tags: req.body.tags,
+    };
     // console.log('grant', newData);
 
     const result = await mongodb
