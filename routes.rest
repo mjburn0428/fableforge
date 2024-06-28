@@ -1,4 +1,4 @@
-
+###
 GET http://localhost:8080/thread
 
 ### Get Single Thread
@@ -8,6 +8,9 @@ GET http://localhost:8080/thread/667cd0ec63a3a699eff71aec
 ### Get threads by Author
 GET http://localhost:8080/thread/author/Gwillis
 
+
+###
+GET http://fableforge.onrender.com/thread
 
 ### Post a thread
 POST http://localhost:8080/thread HTTP/1.1
