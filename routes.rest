@@ -9,8 +9,6 @@ GET http://localhost:8080/thread/667cd0ec63a3a699eff71aec
 GET http://localhost:8080/thread/author/Gwillis
 
 
-###
-GET http://fableforge.onrender.com/thread
 
 ### Post a thread
 POST http://localhost:8080/thread HTTP/1.1
@@ -47,3 +45,12 @@ Content-Type: application/json
       "genre": "Fantasy/Science-Fiction"
     }
 }
+
+###
+GET http://fableforge.onrender.com/thread
+
+### Get ALL threads via Render
+GET https://fableforge-ouvx.onrender.com/thread
+
+### Get threads by Author
+GET https://fableforge-ouvx.onrender.com/thread/author/Gwillis
