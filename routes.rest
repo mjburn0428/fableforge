@@ -1,5 +1,8 @@
-
+###
 GET http://localhost:8080/thread
+
+###
+GET http://fableforge.onrender.com/thread
 
 ### Post a thread
 POST http://localhost:8080/thread HTTP/1.1
