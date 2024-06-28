@@ -6,7 +6,7 @@ const doc = {
     description: 'Description'
   },
   host: 'fableforge.onrender.com',
-  schemes: ['http']
+  schemes: ['https']
 };
 
 const outputFile = './swagger-output.json';
