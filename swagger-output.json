@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Team 2 Author App",
-    "description": "Description",
+    "description": "Welcome to FabelForge. Here is where you can post stories to inspire others.",
     "version": "1.0.0"
   },
   "host": "fableforge.onrender.com",
@@ -56,6 +56,25 @@
       }
     },
     "/thread/{id}": {
+      "get": {
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
       "put": {
         "description": "",
         "parameters": [
@@ -96,6 +115,30 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/thread/author/{authorName}": {
+      "get": {
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "authorName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           },
           "500": {
             "description": "Internal Server Error"
