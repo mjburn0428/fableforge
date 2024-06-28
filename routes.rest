@@ -1,9 +1,6 @@
 
 GET http://localhost:8080/thread
 
-### Get thread by ID
-GET http://localhost:8080/thread/667cd26963a3a699eff71aed
-
 ### Post a thread
 POST http://localhost:8080/thread HTTP/1.1
 Content-Type: application/json
