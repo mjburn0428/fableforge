@@ -9,6 +9,19 @@ const getAll = async (req, res) => {
   });
 };
 
+const getSingle = async (req, res, next) => {
+  const threadId = new ObjectId(req.params.id);
+  const result = await mongodb
+    .getDb()
+    .db()
+    .collection('thread')
+    .find({ _id: threadId });
+  result.toArray().then((list) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(list[0]);
+  });
+};
+
 const createThread = async (req, res) => {
   try {
     const newThread = req.body;
@@ -51,6 +64,24 @@ const updateThread = async (req, res, next) => {
   }
 };
 // TODO: write getThreadsByAuthor function
+const getAuthorThreads = async (req, res, next) => {
+  try {
+    const { authorName } = req.params;
+    const result = await mongodb
+      .getDb()
+      .db()
+      .collection('thread')
+      .find({ author: authorName });
+    result.toArray().then((list) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(list);
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: 'An error occured while fetching threads', error });
+  }
+};
 
 // TODO: write getThreadsByGenre function
 
@@ -60,6 +91,8 @@ const updateThread = async (req, res, next) => {
 
 module.exports = {
   getAll,
+  getSingle,
   createThread,
   updateThread,
+  getAuthorThreads,
 };
