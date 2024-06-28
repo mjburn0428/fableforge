@@ -5,7 +5,7 @@ const doc = {
     title: 'Team 2 Author App',
     description: 'Description'
   },
-  host: 'fableforge.onrender.com'
+  host: 'localhost:8080'
 };
 
 const outputFile = './swagger-output.json';
