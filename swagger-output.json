@@ -1,19 +1,14 @@
-{
-  "swagger": "2.0",
+"swagger": "2.0",
   "info": {
     "title": "Team 2 Author App",
     "description": "Welcome to FabelForge. Here is where you can post stories to inspire others.",
     "version": "1.0.0"
   },
-  "host": "fableforge-ouvx.onrender.com",
+  "host": "fableforge.onrender.com",
   "basePath": "/",
-<<<<<<< HEAD
   "schemes": [
     "https"
   ],
-=======
-  "schemes": ["http", "https"],
->>>>>>> d171704780486fb34e66ba2633fd85d8aad05d8f
   "paths": {
     "/": {
       "get": {
@@ -38,7 +33,9 @@
     "/thread/": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -60,7 +57,9 @@
     "/thread/{id}": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -125,7 +124,9 @@
     "/thread/author/{authorName}": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "authorName",
