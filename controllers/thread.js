@@ -9,9 +9,6 @@ const getAll = async (req, res) => {
   });
 };
 
-
-
-
 const createThread = async (req, res) => {
   try {
     const newThread = req.body;

@@ -2,7 +2,7 @@ const swaggerAutogen = require('swagger-autogen')();
 
 const doc = {
   info: {
-    title: 'Team 2 Author App API',
+    title: 'Team 2 Author App',
     description: 'Description'
   },
   host: 'localhost:8080'
