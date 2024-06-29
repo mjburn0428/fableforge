@@ -1,8 +1,19 @@
 ###
 GET http://localhost:8080/thread
 
+<<<<<<< HEAD
 ###
 GET http://fableforge.onrender.com/thread
+=======
+### Get Single Thread
+GET http://localhost:8080/thread/667cd0ec63a3a699eff71aec
+
+
+### Get threads by Author
+GET http://localhost:8080/thread/author/Gwillis
+
+
+>>>>>>> d171704780486fb34e66ba2633fd85d8aad05d8f
 
 ### Post a thread
 POST http://localhost:8080/thread HTTP/1.1
@@ -39,3 +50,12 @@ Content-Type: application/json
       "genre": "Fantasy/Science-Fiction"
     }
 }
+
+###
+GET http://fableforge.onrender.com/thread
+
+### Get ALL threads via Render
+GET https://fableforge-ouvx.onrender.com/thread
+
+### Get threads by Author
+GET https://fableforge-ouvx.onrender.com/thread/author/Gwillis

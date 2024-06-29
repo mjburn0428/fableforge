@@ -5,11 +5,14 @@
     "description": "Welcome to FabelForge. Here is where you can post stories to inspire others.",
     "version": "1.0.0"
   },
-  "host": "fableforge.onrender.com",
+  "host": "fableforge-ouvx.onrender.com",
   "basePath": "/",
+
   "schemes": [
     "https"
   ],
+
+  "schemes": ["http", "https"],
   "paths": {
     "/": {
       "get": {
@@ -34,9 +37,7 @@
     "/thread/": {
       "get": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK"
@@ -58,9 +59,7 @@
     "/thread/{id}": {
       "get": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -125,9 +124,7 @@
     "/thread/author/{authorName}": {
       "get": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "authorName",
