@@ -5,6 +5,7 @@
     "version": "1.0.0"
   },
   "host": "fableforge.onrender.com",
+  "host": "fableforge.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
