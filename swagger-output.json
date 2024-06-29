@@ -5,7 +5,7 @@
     "description": "Welcome to FabelForge. Here is where you can post stories to inspire others.",
     "version": "1.0.0"
   },
-  "host": "fableforge-ouvx.onrender.com",
+  "host": "fableforge.onrender.com",
   "basePath": "/",
 
   "schemes": [
