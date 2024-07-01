@@ -22,9 +22,31 @@ const getSingle = async (req, res, next) => {
   });
 };
 
+// TODO: MODIFY this to be able to take in user input
 const createThread = async (req, res) => {
   try {
-    const newThread = req.body;
+    const { title, author, publishedDate, content, tags, metadata } = req.body;
+
+    if (
+      !title ||
+      !author ||
+      !publishedDate ||
+      !content ||
+      !Array.isArray(tags) ||
+      typeof metadata !== 'object'
+    ) {
+      return res.status(400).json({ message: 'Invalid input data' });
+    }
+
+    const newThread = {
+      title,
+      author,
+      publishedDate,
+      content,
+      tags,
+      metadata,
+    };
+
     const result = await mongodb
       .getDb()
       .db()
@@ -36,6 +58,7 @@ const createThread = async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
+
 // TODO: write updateThread function
 const updateThread = async (req, res, next) => {
   try {

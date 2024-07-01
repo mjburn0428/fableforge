@@ -38,7 +38,8 @@ Content-Type: application/json
     "tags": [
       "mystery",
       "adventure",
-      "romance"
+      "romance",
+      "fantasy"
     ],
     "metadata": {
       "wordCount": 1500,
@@ -54,3 +55,8 @@ GET https://fableforge-ouvx.onrender.com/thread
 
 ### Get threads by Author
 GET https://fableforge-ouvx.onrender.com/thread/author/Gwillis
+
+
+### Update thread via render
+
+PUT http://fableforge.onrender.com/thread/id
