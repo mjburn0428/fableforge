@@ -39,12 +39,11 @@ const createThread = async (req, res) => {
     }
 
     const newThread = {
-      title,
-      author,
-      publishedDate,
-      content,
-      tags,
-      metadata,
+      title: req.body.title,
+      author: req.body.author,
+      publishedDate: req.body.publishedDate,
+      content: req.body.content,
+      tags: req.body.tags,
     };
 
     const result = await mongodb
