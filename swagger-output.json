@@ -7,12 +7,9 @@
   },
   "host": "fableforge.onrender.com",
   "basePath": "/",
-
   "schemes": [
     "https"
   ],
-
-  "schemes": ["http", "https"],
   "paths": {
     "/": {
       "get": {
@@ -37,7 +34,9 @@
     "/thread/": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -57,23 +56,6 @@
       }
     },
     "/thread/{id}": {
-      "get": {
-        "description": "",
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
       "put": {
         "description": "",
         "parameters": [
@@ -119,15 +101,12 @@
             "description": "Internal Server Error"
           }
         }
-      }
-    },
-    "/thread/author/{authorName}": {
-      "get": {
+      },
+      "delete": {
         "description": "",
-        "produces": ["application/json"],
         "parameters": [
           {
-            "name": "authorName",
+            "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
