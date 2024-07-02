@@ -8,11 +8,17 @@
   "host": "fableforge.onrender.com",
   "basePath": "/",
 
+
   "schemes": [
     "https"
   ],
 
   "schemes": ["http", "https"],
+
+  "schemes": [
+    "https"
+  ],
+
   "paths": {
     "/": {
       "get": {
@@ -37,7 +43,9 @@
     "/thread/": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -46,9 +54,41 @@
       },
       "post": {
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                },
+                "author": {
+                  "example": "any"
+                },
+                "publishedDate": {
+                  "example": "any"
+                },
+                "content": {
+                  "example": "any"
+                },
+                "tags": {
+                  "example": "any"
+                },
+                "metadata": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -59,7 +99,9 @@
     "/thread/{id}": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -124,7 +166,9 @@
     "/thread/author/{authorName}": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "authorName",
