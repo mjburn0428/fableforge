@@ -54,7 +54,20 @@ const updateThread = async (req, res, next) => {
 
 // TODO: write getThreadsByGenre function
 
-// TODO: write deleteThreadbyId function
+const deleteThreadbyId = async (req, res) => {
+  try {
+    const threadId = new ObjectId(req.params.id);
+    const response = await mongodb.getDb().db().collection('thread').deleteOne({ _id: threadId });
+    if (response.deletedCount > 0) {
+      res.status(200).send();
+    } else {
+      res.status(500).json({ error: 'We are sorry an error occurred when deleting the thread.' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Invalid ThreadID format.' });
+  }
+};
+
 
 // TODO: write commentOnThread(post) function
 
@@ -62,4 +75,5 @@ module.exports = {
   getAll,
   createThread,
   updateThread,
+  deleteThreadbyId,
 };

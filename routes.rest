@@ -12,7 +12,8 @@ GET http://localhost:8080/thread/667cd0ec63a3a699eff71aec
 ### Get threads by Author
 GET http://localhost:8080/thread/author/Gwillis
 
-
+### Delete Thread by ID
+DELETE http://localhost:8080/thread/667f6f4e6318027b4ac2eafd
 
 
 ### Post a thread
@@ -44,6 +45,7 @@ Content-Type: application/json
       "mystery",
       "adventure",
       "cheese"
+      
     ],
     "metadata": {
       "wordCount": 1500,
