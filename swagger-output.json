@@ -7,9 +7,18 @@
   },
   "host": "fableforge.onrender.com",
   "basePath": "/",
+
+
   "schemes": [
     "https"
   ],
+
+  "schemes": ["http", "https"],
+
+  "schemes": [
+    "https"
+  ],
+
   "paths": {
     "/": {
       "get": {

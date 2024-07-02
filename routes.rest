@@ -1,6 +1,10 @@
 ###
 GET http://localhost:8080/thread
 
+
+###
+GET http://fableforge.onrender.com/thread
+=======
 ### Get Single Thread
 GET http://localhost:8080/thread/667cd0ec63a3a699eff71aec
 
@@ -8,6 +12,8 @@ GET http://localhost:8080/thread/667cd0ec63a3a699eff71aec
 ### Get threads by Author
 GET http://localhost:8080/thread/author/Gwillis
 
+### Delete Thread by ID
+DELETE http://localhost:8080/thread/667f6f4e6318027b4ac2eafd
 
 
 ### Post a thread
@@ -38,8 +44,10 @@ Content-Type: application/json
     "tags": [
       "mystery",
       "adventure",
+      "cheese"
       "romance",
       "fantasy"
+
     ],
     "metadata": {
       "wordCount": 1500,

@@ -9,6 +9,7 @@ const getAll = async (req, res) => {
   });
 };
 
+
 const getSingle = async (req, res, next) => {
   const threadId = new ObjectId(req.params.id);
   const result = await mongodb
@@ -23,6 +24,7 @@ const getSingle = async (req, res, next) => {
 };
 
 // TODO: MODIFY this to be able to take in user input
+
 const createThread = async (req, res) => {
   try {
     const { title, author, publishedDate, content, tags, metadata } = req.body;
@@ -86,35 +88,29 @@ const updateThread = async (req, res, next) => {
   }
 };
 // TODO: write getThreadsByAuthor function
-const getAuthorThreads = async (req, res, next) => {
-  try {
-    const { authorName } = req.params;
-    const result = await mongodb
-      .getDb()
-      .db()
-      .collection('thread')
-      .find({ author: authorName });
-    result.toArray().then((list) => {
-      res.setHeader('Content-Type', 'application/json');
-      res.status(200).json(list);
-    });
-  } catch (error) {
-    res
-      .status(500)
-      .json({ message: 'An error occured while fetching threads', error });
-  }
-};
 
 // TODO: write getThreadsByGenre function
 
-// TODO: write deleteThreadbyId function
+const deleteThreadbyId = async (req, res) => {
+  try {
+    const threadId = new ObjectId(req.params.id);
+    const response = await mongodb.getDb().db().collection('thread').deleteOne({ _id: threadId });
+    if (response.deletedCount > 0) {
+      res.status(200).send();
+    } else {
+      res.status(500).json({ error: 'We are sorry an error occurred when deleting the thread.' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Invalid ThreadID format.' });
+  }
+};
+
 
 // TODO: write commentOnThread(post) function
 
 module.exports = {
   getAll,
-  getSingle,
   createThread,
   updateThread,
-  getAuthorThreads,
+  deleteThreadbyId,
 };
