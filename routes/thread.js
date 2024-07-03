@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-
 const threadController = require('../controllers/thread');
+const { requiresAuth } = require('express-openid-connect');
 
-router.get('/', threadController.getAll);
-router.post('/', threadController.createThread);
-router.put('/:id', threadController.updateThread);
-router.delete('/:id', threadController.deleteThreadbyId);
+router.get('/', requiresAuth(), threadController.getAll);
+router.post('/', requiresAuth(), threadController.createThread);
+router.put('/:id', requiresAuth(),threadController.updateThread);
+router.delete('/:id', requiresAuth(), threadController.deleteThreadbyId);
 
 module.exports = router;
