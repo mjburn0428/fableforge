@@ -2,10 +2,11 @@ const swaggerAutogen = require('swagger-autogen')();
 
 const doc = {
   info: {
-    title: 'My API',
-    description: 'Description'
+    title: 'Team 2 Author App',
+    description: 'Welcome to FabelForge. Here is where you can post stories to inspire others.'
   },
-  host: 'localhost:8080'
+  host: 'fableforge.onrender.com',
+  schemes: ['https']
 };
 
 const outputFile = './swagger-output.json';
