@@ -1,0 +1,7 @@
+{
+    "editor.multiCursorMergeOverlapping": false,
+    "mergeEditor.showDeletionMarkers": false,
+    "merge-conflict.codeLens.enabled": false,
+    "merge-conflict.decorators.enabled": false,
+    "mergeEditor.diffAlgorithm": "legacy"
+}
