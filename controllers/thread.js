@@ -110,6 +110,7 @@ const deleteThreadbyId = async (req, res) => {
 
 module.exports = {
   getAll,
+  getSingle,
   createThread,
   updateThread,
   deleteThreadbyId,
