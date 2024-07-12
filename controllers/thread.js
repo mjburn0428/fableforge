@@ -22,8 +22,6 @@ const getSingle = async (req, res, next) => {
   });
 };
 
-// TODO: MODIFY this to be able to take in user input
-
 const createThread = async (req, res) => {
   try {
     const { title, author, publishedDate, content, tags, metadata } = req.body;
@@ -85,9 +83,20 @@ const updateThread = async (req, res, next) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
+
 // TODO: write getThreadsByAuthor function
 
 // TODO: write getThreadsByTag function
+const getThreadsByTag = async (tag) => {
+  try {
+    const db = mongodb.getDb().db();
+    const threads = await db.collection('thread').find({ tags: tag }).toArray();
+    return threads;
+  } catch (error) {
+    console.error('Error fetching threads by tag:', error);
+    throw new Error('Error fetching threads by tag');
+  }
+};
 
 const deleteThreadbyId = async (req, res) => {
   try {
@@ -114,6 +123,7 @@ const deleteThreadbyId = async (req, res) => {
 module.exports = {
   getAll,
   getSingle,
+  getThreadsByTag,
   createThread,
   updateThread,
   deleteThreadbyId,
