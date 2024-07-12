@@ -1,6 +1,8 @@
 ###
 GET http://localhost:8080/thread
 
+###
+GET http://localhost:8080/thread?tag=Comedy
 
 ###
 GET http://fableforge.onrender.com/thread
