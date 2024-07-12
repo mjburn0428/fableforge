@@ -90,7 +90,15 @@ const updateThread = async (req, res, next) => {
 const getThreadsByTag = async (tag) => {
   try {
     const db = mongodb.getDb().db();
-    const threads = await db.collection('thread').find({ tags: tag }).toArray();
+    const threads = await db
+      .collection('thread')
+      .find({
+        $or: [
+          { tags: tag }, // for single string tag documents
+          { tags: { $in: [tag] } }, //for tags in an array
+        ],
+      })
+      .toArray();
     return threads;
   } catch (error) {
     console.error('Error fetching threads by tag:', error);
