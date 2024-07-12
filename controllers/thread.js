@@ -9,7 +9,6 @@ const getAll = async (req, res) => {
   });
 };
 
-
 const getSingle = async (req, res, next) => {
   const threadId = new ObjectId(req.params.id);
   const result = await mongodb
@@ -41,11 +40,12 @@ const createThread = async (req, res) => {
     }
 
     const newThread = {
-      title: req.body.title,
-      author: req.body.author,
-      publishedDate: req.body.publishedDate,
-      content: req.body.content,
-      tags: req.body.tags,
+      title,
+      author,
+      publishedDate,
+      content,
+      tags,
+      metadata: metadata || {},
     };
 
     const result = await mongodb
@@ -60,7 +60,6 @@ const createThread = async (req, res) => {
   }
 };
 
-// TODO: write updateThread function
 const updateThread = async (req, res, next) => {
   try {
     const threadId = new ObjectId(req.params.id);
@@ -71,7 +70,6 @@ const updateThread = async (req, res, next) => {
       content: req.body.content,
       tags: req.body.tags,
     };
-    // console.log('grant', newData);
 
     const result = await mongodb
       .getDb()
@@ -89,22 +87,27 @@ const updateThread = async (req, res, next) => {
 };
 // TODO: write getThreadsByAuthor function
 
-// TODO: write getThreadsByGenre function
+// TODO: write getThreadsByTag function
 
 const deleteThreadbyId = async (req, res) => {
   try {
     const threadId = new ObjectId(req.params.id);
-    const response = await mongodb.getDb().db().collection('thread').deleteOne({ _id: threadId });
+    const response = await mongodb
+      .getDb()
+      .db()
+      .collection('thread')
+      .deleteOne({ _id: threadId });
     if (response.deletedCount > 0) {
       res.status(200).send();
     } else {
-      res.status(500).json({ error: 'We are sorry an error occurred when deleting the thread.' });
+      res.status(500).json({
+        error: 'We are sorry an error occurred when deleting the thread.',
+      });
     }
   } catch (error) {
     res.status(500).json({ error: 'Invalid ThreadID format.' });
   }
 };
-
 
 // TODO: write commentOnThread(post) function
 
