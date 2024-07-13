@@ -9,7 +9,6 @@ const getAll = async (req, res) => {
   });
 };
 
-
 const getSingle = async (req, res, next) => {
   const threadId = new ObjectId(req.params.id);
   const result = await mongodb
@@ -22,8 +21,6 @@ const getSingle = async (req, res, next) => {
     res.status(200).json(list[0]);
   });
 };
-
-// TODO: MODIFY this to be able to take in user input
 
 const createThread = async (req, res) => {
   try {
@@ -41,11 +38,12 @@ const createThread = async (req, res) => {
     }
 
     const newThread = {
-      title: req.body.title,
-      author: req.body.author,
-      publishedDate: req.body.publishedDate,
-      content: req.body.content,
-      tags: req.body.tags,
+      title,
+      author,
+      publishedDate,
+      content,
+      tags,
+      metadata: metadata || {},
     };
 
     const result = await mongodb
@@ -60,7 +58,6 @@ const createThread = async (req, res) => {
   }
 };
 
-// TODO: write updateThread function
 const updateThread = async (req, res, next) => {
   try {
     const threadId = new ObjectId(req.params.id);
@@ -71,7 +68,6 @@ const updateThread = async (req, res, next) => {
       content: req.body.content,
       tags: req.body.tags,
     };
-    // console.log('grant', newData);
 
     const result = await mongodb
       .getDb()
@@ -87,29 +83,68 @@ const updateThread = async (req, res, next) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
-// TODO: write getThreadsByAuthor function
 
-// TODO: write getThreadsByGenre function
+// TODO: write getThreadsByAuthor function
+const getThreadsByAuthor = async (req, res) => {
+  try {
+    const author = req.params.author;
+    const threads = await mongodb.getDb().db().collection('thread').find({ author }).toArray();
+    if (threads.length === 0) {
+      return res.status(404).json({ message: 'No threads found for this author' });
+    }
+    res.status(200).json(threads);
+  } catch (error) {
+    console.error('Error fetching threads by author:', error);
+    res.status(500).json({ message: 'Error fetching threads by author' });
+  }
+};
+
+// TODO: write getThreadsByTag function
+const getThreadsByTag = async (tag) => {
+  try {
+    const db = mongodb.getDb().db();
+    const threads = await db
+      .collection('thread')
+      .find({
+        $or: [
+          { tags: tag }, // for single string tag documents
+          { tags: { $in: [tag] } }, //for tags in an array
+        ],
+      })
+      .toArray();
+    return threads;
+  } catch (error) {
+    console.error('Error fetching threads by tag:', error);
+    throw new Error('Error fetching threads by tag');
+  }
+};
 
 const deleteThreadbyId = async (req, res) => {
   try {
     const threadId = new ObjectId(req.params.id);
-    const response = await mongodb.getDb().db().collection('thread').deleteOne({ _id: threadId });
+    const response = await mongodb
+      .getDb()
+      .db()
+      .collection('thread')
+      .deleteOne({ _id: threadId });
     if (response.deletedCount > 0) {
       res.status(200).send();
     } else {
-      res.status(500).json({ error: 'We are sorry an error occurred when deleting the thread.' });
+      res.status(500).json({
+        error: 'We are sorry an error occurred when deleting the thread.',
+      });
     }
   } catch (error) {
     res.status(500).json({ error: 'Invalid ThreadID format.' });
   }
 };
 
-
 // TODO: write commentOnThread(post) function
 
 module.exports = {
   getAll,
+  getSingle,
+  getThreadsByTag,
   createThread,
   updateThread,
   deleteThreadbyId,

@@ -1,0 +1,133 @@
+-- Three Table Database
+
+-- Table author
+CREATE TABLE IF NOT EXISTS `author` (
+  `author_id` INT NOT NULL,
+  `first_name` VARCHAR(45) NOT NULL,
+  `last_name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`author_id`)
+  );
+
+-- Table story
+CREATE TABLE IF NOT EXISTS `story` (
+  `story_id` INT NOT NULL,
+  `title` VARCHAR(45) NOT NULL,
+  `publishDate` VARCHAR(45) NOT NULL,
+  `content` VARCHAR(1000) NOT NULL,
+  `author_id` INT NOT NULL,
+  PRIMARY KEY (`story_id`),
+  INDEX `fk_story_author_idx` (`author_id` ASC) VISIBLE,
+  CONSTRAINT `fk_story_author`
+    FOREIGN KEY (`author_id`)
+    REFERENCES `author` (`author_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+-- Table tag
+CREATE TABLE IF NOT EXISTS `tag` (
+  `tag_id` INT NOT NULL,
+  `tag_name` VARCHAR(45) NOT NULL,
+  `story_id` INT NOT NULL,
+  PRIMARY KEY (`tag_id`),
+  INDEX `fk_tag_story1_idx` (`story_id` ASC) VISIBLE,
+  CONSTRAINT `fk_tag_story1`
+    FOREIGN KEY (`story_id`)
+    REFERENCES `story` (`story_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+-- Inserting Values into author
+-- All Primary Keys have been left blank
+INSERT INTO public.author (
+    -- author_id,
+    first_name,
+    last_name
+)
+Values(
+    (
+        -- author_id,
+        'John',
+        'Smith'
+    ),
+    (
+        -- author_id,
+        'Mary',
+        'Sue'
+    ),
+    (
+        -- author_id,
+        'Kevin',
+        'Gammon'
+    )
+);
+
+-- Inserting Values into story
+-- All Primary Keys have been left blank
+INSERT INTO public.story(
+    -- story_id,
+    title,
+    publishDate,
+    content,
+    -- author_id
+)
+Values(
+    (
+        -- story_id,
+        'Standoff',
+        '02/13/2012',
+        '“This town ain’t big enough for the two of us.” The man on the opposite side of the street just stood in silence. From underneath his poncho, he pulled out a thin cigar, bit off one end, and lit it with a match struck on the heel of his boot. He puffed it a few times, letting the flame catch the dried tobacco leaf within. He breathed out the smoke through his nose, and clamped the cigar between his teeth. “You ain’t got anything original to say? Starting our little standoff with something so cliché as that.” He chuckled. He opponent gave an exasperated sigh, frustrated that he wasn’t being taken seriously. “Now, you see here! Ranger!” “I ain’t no ranger.” “Ranger or not, I is taking you down! This here is my town!” “Who says?” “Well, I say!” From the homes and frontier businesses lining the town’s main street, eyes peered through openings in curtains, holes in walls, and from concealed places on balconies. The stranger in the poncho flipped it over his shoulder, revealing the polished six-shooter at his side. “I say that what you say can be damned.” He moved the cigar from one side of his mouth to the other. “And a bullet is absolute, wouldn’t you agree? After this, the bullet will be deciding who’s say this here town will be following.” The opponent spat on the ground, “Finally, something we can agree on.” Silence fell over the main street. Only the breeze could be heard. A wind chime made of old bottles gently clinked. A tumble weed, lost and afraid, rolled across the street as fast as it could. It didn’t want to be caught in the cross fire. The men stood for some time. Hands hovering over their weapons. They eyed each other, trying to judge the moves the other man would make. They flexed their fingers, took deep breaths. A single shot rang out through the town. The antagonist hadn’t even drawn his weapon. He slowly fell backwards, kicking up a cloud of dust.'
+        -- author_id
+    ),
+    (
+        -- story_id,
+        'Flower Field',
+        '12/27/2004',
+        'The road was hard and long, The sun above hot and strong, Flowers in a field wide, Cloud did the bright face hide, Stirred by the breeze, A Traveler does amble, To themselves they ramble, Stillness broken by a sneeze'
+        -- author_id
+    ),
+    (
+        -- story_id,
+        'Beneath Foreign Brush',
+        '06/04/2022',
+        'It scuttled beneath the brush, hidden from the twin suns overhead. One, yellow and warm, the other small, white, with hard unforgiving light. Down here, among the drooping fungi, it seemed that the great pillars held up the sky. They went on forever, beyond its ability to see. It just knew that they towered above it, and so, it ignored the pillars. Why bother about something far beyond its understanding. It had to worry about what was down here. The long sticky thing that carried so many of its kind up to the creature. Even that creature was too big for it to understand. There, a scent! Dripping shroom nectar! It moved in the deep shadows of the drooping fungi, concealing itself as a patch of disturbed moss. From shadow to shadow. From cool haven to cool haven. Each step bringing it closer to the dripping shroom nectar. It had made it. Finally. It approached the glistening bead of reddish liquid. It sipped at it, delicious. Then it heard the creature’s growl.'
+        -- author_id
+    ),
+    (
+        -- story_id,
+        'Fishing Trip',
+        '01/26/1999',
+        'The boat sat still on the water. Ducks dived in the shallows, letting their rumps and feet stick up in the air. The wind was gentle, stirring the lake’s surface into tiny waves the moved from east to west. A few other woodland birds and critters made sounds, filling the gentle afternoon with their activities. She moved her wide brim hat further down her face as she lean back. The fishing pole in her hands was still, she liked that. The whole point of fishing wasn’t the catch, it was being away from the house, taking a break from her four sisters. She settled into a comfortable position, yawning. Today was a good day.'
+        -- author_id
+    )
+);
+
+-- Inserting Values into tag
+-- All Primay Keys have been left blank
+INSERT INTO public.tag(
+    -- tag_id,
+    tag_name
+)
+Values(
+    (
+        -- tag_id,
+        'western'
+    ),
+    (
+        -- tag_id,
+        'poetry'
+    ),
+    (
+        -- tag_id,
+        'flowers'
+    ),
+    (
+        -- tag_id,
+        'alien'
+    ),
+    (
+        -- tag_id,
+        'fishing'
+    )
+);
+
+-- END OF LINE

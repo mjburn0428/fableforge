@@ -1,43 +1,46 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongodb = require('./db/connect');
 const cors = require('cors');
+const { auth } = require('express-openid-connect');
 
+const port = process.env.PORT || 8080;
 const app = express();
 
-const swaggerRouter = require('./routes/swagger');
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  secret: process.env.SECRET, // Ensure this is set in the environment variables
+  baseURL: process.env.BASE_URL || 'https://fableforge.onrender.com',
+  clientID: process.env.CLIENT_ID, // Ensure this is set in the environment variables
+  issuerBaseURL: process.env.ISSUER_BASE_URL // Ensure this is set in the environment variables
+};
 
-const port = process.env.port || 8080;
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(auth(config));
 
-// Apply CORS middleware
+app.use(bodyParser.json());
 app.use(cors());
 
-// Body parser middleware
-app.use(bodyParser.json());
-
-// Custom middleware to set headers (Optional if using CORS middleware)
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  next();
+// req.isAuthenticated is provided from the auth router
+app.get('/', (req, res) => {
+  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
 });
 
-// Route middleware
+// Main routes file.
 app.use('/', require('./routes'));
 
+// Routes to use for Auth Login
+app.use('/thread', require('./routes/thread'));
 
-app.use(cors()).use(bodyParser.json()).use('/', require('./routes'));
-app.use('/', swaggerRouter);
 
-
-// Initialize DB and start server
 mongodb.initDb((err) => {
   if (err) {
     console.log(err);
   } else {
     app.listen(port, () => {
-      console.log(`Connected to DB and listening on Port ${port}`);
+      console.log(`Connected to DB and listening on ${port}`);
     });
   }
 });

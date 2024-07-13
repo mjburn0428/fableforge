@@ -1,6 +1,8 @@
 ###
 GET http://localhost:8080/thread
 
+###
+GET http://localhost:8080/thread?tag=Comedy
 
 ###
 GET http://fableforge.onrender.com/thread
@@ -20,16 +22,20 @@ DELETE http://localhost:8080/thread/667f6f4e6318027b4ac2eafd
 POST http://localhost:8080/thread HTTP/1.1
 Content-Type: application/json
 
- {
-  "title": "Much Ado About Nothing",
-  "author": "Lei Z. Boye",
-  "publishedDate": "2023-08-15",
-  "content": "It's true... men really can sit around and think about nothing. ",
-  "tags": ["comedy", "self-help"],
-  "metadata": {
-    "wordCount": 500,
-    "genre": "Self-Help"
-  }
+{
+    "title": "Spies vs Mercs",
+    "author": "Joe Burner",
+    "publishedDate": "2024-07-02",
+    "content": "Sam Fisher knew what he had to do.... ",
+    "tags": [
+      "mystery",
+      "adventure",
+      "spies"
+    ],
+    "metadata": {
+      "wordCount": 1500,
+      "genre": "Thriller"
+    }
 }
 
 ### Update a Thread
