@@ -1,22 +1,34 @@
 ###
 GET http://localhost:8080/thread
 
+
 ###
 GET http://fableforge.onrender.com/thread
+=======
+### Get Single Thread
+GET http://localhost:8080/thread/667cd0ec63a3a699eff71aec
+
+
+### Get threads by Author
+GET http://localhost:8080/thread/author/Gwillis
+
+### Delete Thread by ID
+DELETE http://localhost:8080/thread/667f6f4e6318027b4ac2eafd
+
 
 ### Post a thread
 POST http://localhost:8080/thread HTTP/1.1
 Content-Type: application/json
 
  {
-  "title": "The Remnant's Hope",
-  "author": "Grant William Willis",
+  "title": "Much Ado About Nothing",
+  "author": "Lei Z. Boye",
   "publishedDate": "2023-08-15",
-  "content": "Jeck knew he had over done it this time.... ",
-  "tags": ["mystery", "fantasy"],
+  "content": "It's true... men really can sit around and think about nothing. ",
+  "tags": ["comedy", "self-help"],
   "metadata": {
-    "wordCount": 1500,
-    "genre": "Fantasy/Science-Fiction"
+    "wordCount": 500,
+    "genre": "Self-Help"
   }
 }
 
@@ -33,9 +45,26 @@ Content-Type: application/json
       "mystery",
       "adventure",
       "cheese"
+      "romance",
+      "fantasy"
+
     ],
     "metadata": {
       "wordCount": 1500,
       "genre": "Fantasy/Science-Fiction"
     }
 }
+
+###
+GET http://fableforge.onrender.com/thread
+
+### Get ALL threads via Render
+GET https://fableforge-ouvx.onrender.com/thread
+
+### Get threads by Author
+GET https://fableforge-ouvx.onrender.com/thread/author/Gwillis
+
+
+### Update thread via render
+
+PUT http://fableforge.onrender.com/thread/id
