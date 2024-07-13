@@ -145,7 +145,6 @@ module.exports = {
   getAll,
   getSingle,
   getThreadsByTag,
-  getThreadsByAuthor,
   createThread,
   updateThread,
   deleteThreadbyId,
