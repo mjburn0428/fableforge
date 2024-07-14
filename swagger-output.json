@@ -21,23 +21,16 @@
         }
       }
     },
-    "/api-docs": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
+  
     "/thread/": {
       "get": {
         "description": "",
         "responses": {
 
+
           "default": {
             "description": ""
+
 
 
           "200": {
@@ -48,9 +41,6 @@
           },
           "500": {
             "description": "Internal Server Error"
-          "default": {
-            "description": ""
-
           }
         }
       },
