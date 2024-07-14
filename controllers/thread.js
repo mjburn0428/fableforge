@@ -85,19 +85,6 @@ const updateThread = async (req, res, next) => {
 };
 
 // TODO: write getThreadsByAuthor function
-const getThreadsByAuthor = async (req, res) => {
-  try {
-    const author = req.params.author;
-    const threads = await mongodb.getDb().db().collection('thread').find({ author }).toArray();
-    if (threads.length === 0) {
-      return res.status(404).json({ message: 'No threads found for this author' });
-    }
-    res.status(200).json(threads);
-  } catch (error) {
-    console.error('Error fetching threads by author:', error);
-    res.status(500).json({ message: 'Error fetching threads by author' });
-  }
-};
 
 // TODO: write getThreadsByTag function
 const getThreadsByTag = async (tag) => {
