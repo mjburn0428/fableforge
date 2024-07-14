@@ -8,7 +8,7 @@
   "host": "fableforge.onrender.com",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/": {
@@ -21,26 +21,22 @@
         }
       }
     },
-  
+    "/api-docs": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/thread/": {
       "get": {
         "description": "",
         "responses": {
-
-
           "default": {
             "description": ""
-
-
-
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       },
