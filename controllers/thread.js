@@ -2,25 +2,45 @@ const mongodb = require('../db/connect');
 const ObjectId = require('mongodb').ObjectId;
 
 const getAll = async (req, res) => {
-  const result = await mongodb.getDb().db().collection('thread').find();
-  result.toArray().then((thread) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(thread);
-  });
-};
-
-const getSingle = async (req, res, next) => {
-  const threadId = new ObjectId(req.params.id);
-  const result = await mongodb
+  try {
+    const result = await mongodb
     .getDb()
     .db()
     .collection('thread')
-    .find({ _id: threadId });
-  result.toArray().then((list) => {
+    .find();
+    const thread = await result.toArray();
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(thread);
+  } catch (error) {
+    console.error("Error retrieving threads:", error);
+    res.status(500).json({ message: "An error occurred while retrieving threads" });
+  }
+};
+
+const getSingle = async (req, res, next) => {
+  try {
+    const threadId = new ObjectId(req.params.id);
+    const result = await mongodb
+      .getDb()
+      .db()
+      .collection('thread')
+      .find({ _id: threadId });
+    const list = await result.toArray();
+
+    if (list.length === 0) {
+      res.status(404).json({ message: "Thread not found" });
+      return;
+    }
+
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(list[0]);
-  });
+  } catch (error) {
+    console.error("Error retrieving thread:", error);
+    res.status(500).json({ message: "An error occurred while retrieving threads" });
+  }
 };
+
+
 
 const createThread = async (req, res) => {
   try {
