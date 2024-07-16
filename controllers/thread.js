@@ -18,6 +18,9 @@ const getAll = async (req, res) => {
 };
 
 const getSingle = async (req, res, next) => {
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json('Must use a valid thread id.');
+  }
   try {
     const threadId = new ObjectId(req.params.id);
     const result = await mongodb
@@ -79,6 +82,9 @@ const createThread = async (req, res) => {
 };
 
 const updateThread = async (req, res, next) => {
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json('Must use a valid thread id to update a thread.');
+  }
   try {
     const threadId = new ObjectId(req.params.id);
     const newData = {
@@ -127,6 +133,9 @@ const getThreadsByTag = async (tag) => {
 };
 
 const deleteThreadbyId = async (req, res) => {
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json('Must use a valid thread id to delete a thread.');
+  }
   try {
     const threadId = new ObjectId(req.params.id);
     const response = await mongodb
