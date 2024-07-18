@@ -8,7 +8,7 @@
   "host": "fableforge.onrender.com",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/": {
