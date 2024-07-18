@@ -8,6 +8,7 @@ const { auth } = require('express-openid-connect');
 const port = process.env.PORT || 8080;
 const app = express();
 
+// Auth configuration
 const config = {
   authRequired: false,
   auth0Logout: true,
@@ -17,24 +18,20 @@ const config = {
   issuerBaseURL: process.env.ISSUER_BASE_URL // Ensure this is set in the environment variables
 };
 
-// auth router attaches /login, /logout, and /callback routes to the baseURL
+// Middleware
 app.use(auth(config));
-
 app.use(bodyParser.json());
 app.use(cors());
 
-// req.isAuthenticated is provided from the auth router
+// Base route to check if the user is authenticated
 app.get('/', (req, res) => {
   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
 });
 
-// Main routes file.
-app.use('/', require('./routes'));
-
-// Routes to use for Auth Login
+// Use routes
 app.use('/thread', require('./routes/thread'));
 
-
+// Initialize DB and start the server
 mongodb.initDb((err) => {
   if (err) {
     console.log(err);
