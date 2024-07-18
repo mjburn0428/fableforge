@@ -4,7 +4,7 @@ const threadController = require('../controllers/thread');
 const { requiresAuth } = require('express-openid-connect');
 
 router.get('/', requiresAuth(), threadController.getAll);
-router.get('/', threadController.getThreadsByTag);
+router.get('/tag/:tag', threadController.getThreadsByTag); // Updated path for getThreadsByTag
 router.post('/', requiresAuth(), threadController.createThread);
 router.put('/:id', requiresAuth(), threadController.updateThread);
 router.delete('/:id', requiresAuth(), threadController.deleteThreadbyId);
