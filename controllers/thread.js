@@ -77,16 +77,30 @@ const updateThread = async (req, res, next) => {
     if (result.matchedCount === 0) {
       return res.status(404).json({ message: 'Thread not found' });
     }
-    res.status(204).json({ message: 'Thread updated succesfully' });
+    res.status(204).json({ message: 'Thread updated successfully' });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
 
-// TODO: write getThreadsByAuthor function
+const getThreadsByAuthor = async (req, res) => {
+  try {
+    const author = req.params.author;
+    const result = await mongodb
+      .getDb()
+      .db()
+      .collection('thread')
+      .find({ author: author })
+      .toArray();
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(result);
+  } catch (error) {
+    console.error('Error fetching threads by author:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
 
-// TODO: write getThreadsByTag function
 const getThreadsByTag = async (tag) => {
   try {
     const db = mongodb.getDb().db();
@@ -132,6 +146,7 @@ module.exports = {
   getAll,
   getSingle,
   getThreadsByTag,
+  getThreadsByAuthor,
   createThread,
   updateThread,
   deleteThreadbyId,
