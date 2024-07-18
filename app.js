@@ -36,6 +36,14 @@ app.use('/thread', require('./routes/thread'));
 
 
 // Initialize DB and start the server
+
+// Handling all errors
+
+process.on('uncaughtException', (err, origin) => {
+  console.log(process.stderr.fd, `Caught exception: ${err}\n` + `Exception origin: ${origin}`);
+});
+
+
 mongodb.initDb((err) => {
   if (err) {
     console.log(err);
