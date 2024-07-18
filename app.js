@@ -34,6 +34,11 @@ app.use('/', require('./routes'));
 // Routes to use for Auth Login
 app.use('/thread', require('./routes/thread'));
 
+// Handling all errors
+
+process.on('uncaughtException', (err, origin) => {
+  console.log(process.stderr.fd, `Caught exception: ${err}\n` + `Exception origin: ${origin}`);
+});
 
 mongodb.initDb((err) => {
   if (err) {
