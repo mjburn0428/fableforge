@@ -7,10 +7,13 @@ const validation = require('../middleware/validate');
 router.get('/', requiresAuth(), threadController.getAll);
 router.get('/:id', threadController.getSingle);
 router.get('/', requiresAuth(), threadController.getThreadsByTag);
+
 router.get('/', threadController.getThreadsByTag);
 router.post('/', requiresAuth(), validation.saveThread,threadController.createThread);
 router.put('/:id', requiresAuth(), validation.saveThread,threadController.updateThread);
 router.delete('/:id', requiresAuth(), threadController.deleteThreadbyId);
 
-module.exports = router;
+// New route for getting threads by author
+router.get('/author/:author', requiresAuth(), threadController.getThreadsByAuthor);
 
+module.exports = router;
