@@ -53,7 +53,7 @@ const createThread = async (req, res) => {
       !publishedDate ||
       !content ||
       !Array.isArray(tags) ||
-      typeof metadata !== 'object'
+      (metadata !== undefined && typeof metadata !== 'object')
     ) {
       return res.status(400).json({ message: 'Invalid input data' });
     }
@@ -67,11 +67,8 @@ const createThread = async (req, res) => {
       metadata: metadata || {},
     };
 
-    const result = await mongodb
-      .getDb()
-      .db()
-      .collection('thread')
-      .insertOne(newThread);
+    const db = mongodb.getDb().db();
+    const result = await db.collection('thread').insertOne(newThread);
     res.status(201).json({ id: result.insertedId });
   } catch (error) {
     console.error(error);
