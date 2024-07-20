@@ -5,7 +5,7 @@ const { requiresAuth } = require('express-openid-connect');
 const validation = require('../middleware/validate');
 
 router.get('/', requiresAuth(), threadController.getAll);
-router.get('/tag/:tag', threadController.getThreadsByTag); // Updated path for getThreadsByTag
+router.get('/tag/:tag', requiresAuth(),threadController.getThreadsByTag); // Updated path for getThreadsByTag
 router.post('/', requiresAuth(), threadController.createThread);
 router.put('/:id', requiresAuth(), threadController.updateThread);
 router.get('/:id', threadController.getSingle);
