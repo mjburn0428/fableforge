@@ -3,17 +3,15 @@ const ObjectId = require('mongodb').ObjectId;
 
 const getAll = async (req, res) => {
   try {
-    const result = await mongodb
-    .getDb()
-    .db()
-    .collection('thread')
-    .find();
+    const result = await mongodb.getDb().db().collection('thread').find();
     const thread = await result.toArray();
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(thread);
   } catch (error) {
-    console.error("Error retrieving threads:", error);
-    res.status(500).json({ message: "An error occurred while retrieving threads" });
+    console.error('Error retrieving threads:', error);
+    res
+      .status(500)
+      .json({ message: 'An error occurred while retrieving threads' });
   }
 };
 
@@ -31,19 +29,19 @@ const getSingle = async (req, res, next) => {
     const list = await result.toArray();
 
     if (list.length === 0) {
-      res.status(404).json({ message: "Thread not found" });
+      res.status(404).json({ message: 'Thread not found' });
       return;
     }
 
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(list[0]);
   } catch (error) {
-    console.error("Error retrieving thread:", error);
-    res.status(500).json({ message: "An error occurred while retrieving threads" });
+    console.error('Error retrieving thread:', error);
+    res
+      .status(500)
+      .json({ message: 'An error occurred while retrieving threads' });
   }
 };
-
-
 
 const createThread = async (req, res) => {
   try {
@@ -127,10 +125,12 @@ const getThreadsByAuthor = async (req, res) => {
   }
 };
 
-const getThreadsByTag = async (tag) => {
+const getThreadsByTag = async (req, res) => {
   try {
-    const db = mongodb.getDb().db();
-    const threads = await db
+    const tag = req.params.tags;
+    const result = await mongodb
+      .getDb()
+      .db()
       .collection('thread')
       .find({
         $or: [
