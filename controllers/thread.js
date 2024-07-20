@@ -43,36 +43,58 @@ const getSingle = async (req, res, next) => {
   }
 };
 
+// const createThread = async (req, res) => {
+//   try {
+//     const { title, author, publishedDate, content, tags, metadata } = req.body;
+
+//     if (
+//       !title ||
+//       !author ||
+//       !publishedDate ||
+//       !content ||
+//       !Array.isArray(tags) ||
+//       (metadata !== undefined && typeof metadata !== 'object')
+//     ) {
+//       return res.status(400).json({ message: 'Invalid input data' });
+//     }
+
+//     const newThread = {
+//       title,
+//       author,
+//       publishedDate,
+//       content,
+//       tags,
+//       metadata: metadata || {},
+//     };
+
+//     const db = mongodb.getDb().db();
+//     const result = await db.collection('thread').insertOne(newThread);
+//     res.status(201).json({ id: result.insertedId });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: 'Internal Server Error' });
+//   }
+// };
+
 const createThread = async (req, res) => {
-  try {
-    const { title, author, publishedDate, content, tags, metadata } = req.body;
-
-    if (
-      !title ||
-      !author ||
-      !publishedDate ||
-      !content ||
-      !Array.isArray(tags) ||
-      (metadata !== undefined && typeof metadata !== 'object')
-    ) {
-      return res.status(400).json({ message: 'Invalid input data' });
-    }
-
-    const newThread = {
-      title,
-      author,
-      publishedDate,
-      content,
-      tags,
-      metadata: metadata || {},
-    };
-
-    const db = mongodb.getDb().db();
-    const result = await db.collection('thread').insertOne(newThread);
-    res.status(201).json({ id: result.insertedId });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal Server Error' });
+  const newThread = {
+    title: req.body.title,
+    author: req.body.author,
+    publishedDate: req.body.publishedDate,
+    content: req.body.content,
+    tags: req.body.tags,
+  };
+  const response = await mongodb
+    .getDb()
+    .db()
+    .collection('thread')
+    .insertOne(newThread);
+  if (response.acknowledged) {
+    res.status(201).json(response);
+  } else {
+    res
+      .status(500)
+      .json(response.error || 'Some error occured while updating the Thread');
   }
 };
 
