@@ -4,7 +4,7 @@ const saveThread = (req, res, next) => {
   const validationRule = {
     title: 'required|string',
     author: 'required|string',
-    ublishedDate: 'required|string',
+    pulishedDate: 'required|string',
     content: 'required|string',
     tags: 'required|string'
   };
