@@ -5,6 +5,6 @@ const commentController = require('../controllers/comment');
 
 router.post('/add_comment', addComment);
 // get all comments on a single thread
-router.get('/', commentController.getAllAssociated);
+// router.get('/', commentController.getAllAssociated);
 
 module.exports = router;

@@ -10,6 +10,6 @@ const doc = {
   host: 'fableforge.onrender.com',
 };
 const outputFile = './swagger-output.json';
-const routes = ['./routes/index.js', './routes/comment.js'];
+const routes = ['./routes/index.js'];
 
 swaggerAutogen(outputFile, routes, doc);

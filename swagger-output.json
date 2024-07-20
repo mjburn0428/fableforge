@@ -17,9 +17,6 @@
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "default": {
-            "description": ""
           }
         }
       }
@@ -232,16 +229,6 @@
           },
           "500": {
             "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/add_comment": {
-      "post": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
           }
         }
       }
