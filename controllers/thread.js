@@ -133,13 +133,11 @@ const getThreadsByTag = async (req, res) => {
       .db()
       .collection('thread')
       .find({
-        $or: [
-          { tags: tag }, // for single string tag documents
-          { tags: { $in: [tag] } }, //for tags in an array
-        ],
+        tags: tag,
       })
       .toArray();
-    return threads;
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(result);
   } catch (error) {
     console.error('Error fetching threads by tag:', error);
     throw new Error('Error fetching threads by tag');
